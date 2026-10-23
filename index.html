@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobTrack — Application Tracker</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#667085;--line:#e7ebf2;--primary:#5546e8;--primary2:#edeaff;--green:#16845b;--orange:#b96b08;--red:#c33b4b;--shadow:0 8px 28px rgba(27,39,76,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.layout{display:grid;grid-template-columns:230px 1fr;min-height:100vh}.sidebar{background:#17172b;color:#fff;padding:26px 18px}.brand{font-weight:800;font-size:21px;display:flex;align-items:center;gap:10px;margin:3px 10px 36px}.logo{display:grid;place-items:center;width:34px;height:34px;background:#7468ff;border-radius:11px}.nav{padding:12px 13px;border-radius:10px;color:#c7c7d8;margin:7px 0}.nav.active{background:#302e50;color:#fff}.side-note{margin:38px 10px 0;color:#a7a7be;font-size:12px}
+main{padding:30px clamp(16px,4vw,48px);max-width:1500px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:27px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:800}.top h1{font-size:clamp(25px,3vw,34px);line-height:1.15;margin:5px 0 8px}.sub{color:var(--muted);margin:0}.button{border:0;border-radius:10px;padding:11px 16px;background:var(--primary);color:white;font-weight:700;cursor:pointer}.button:hover{filter:brightness(.95)}.button.secondary{background:#f0efff;color:var(--primary)}.button.danger{background:#fff0f1;color:var(--red)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:24px}.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:19px}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.stat-icon{background:var(--primary2);color:var(--primary);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:18px}.number{font-size:30px;font-weight:800;margin-top:12px}.small{color:var(--muted);font-size:12px}.content{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:18px}.panel{padding:21px;margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.panel h2{font-size:17px;margin:0}.search{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;outline:none;font:inherit}.search:focus,input:focus,select:focus,textarea:focus{border-color:#9c94ff;box-shadow:0 0 0 3px #5546e81a;outline:none}.filters{display:flex;gap:8px;margin:12px 0 16px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;color:var(--muted);cursor:pointer}.filter.active{background:var(--primary2);color:var(--primary);border-color:#d8d3ff}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:530px}th{text-align:left;font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;padding:12px 9px;border-bottom:1px solid var(--line)}td{padding:14px 9px;border-bottom:1px solid var(--line);font-size:13px}tr:last-child td{border-bottom:0}.company{font-weight:750}.role{font-size:12px;color:var(--muted)}.pill{display:inline-block;padding:5px 9px;border-radius:99px;font-size:11px;font-weight:750;background:#eef1f7;color:#566078;white-space:nowrap}.pill.Applied{background:#edeaff;color:#5546e8}.pill.Interview{background:#fff0d9;color:#a15c00}.pill.Offer{background:#dcf7e9;color:#14734e}.pill.Rejected{background:#ffe5e8;color:#b42e42}.actions{display:flex;gap:6px}.mini{border:1px solid var(--line);background:white;border-radius:7px;padding:6px 8px;cursor:pointer;font-size:12px}.empty{text-align:center;padding:36px;color:var(--muted)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.field label{font-size:12px;font-weight:700;color:#49536a}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font:inherit;background:#fff}.field textarea{resize:vertical;min-height:76px}.full{grid-column:1/-1}.form-actions{display:flex;gap:8px;justify-content:flex-end}.activity{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.activity:last-child{border:0}.dot{width:9px;height:9px;border-radius:50%;background:#7468ff;margin-top:6px;flex:none}.activity-text{font-size:13px}.activity-time{font-size:11px;color:var(--muted);margin-top:3px}.hint{background:#f8f7ff;border:1px solid #e6e2ff;padding:14px;border-radius:12px;color:#514a89;font-size:12px;margin-top:14px}.footer{text-align:center;color:var(--muted);font-size:11px;padding:8px 0 20px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#17172b;color:white;padding:12px 18px;border-radius:10px;display:none;box-shadow:var(--shadow);z-index:9}.modal-back{position:fixed;inset:0;background:#12122577;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal{background:white;border-radius:18px;padding:24px;width:min(520px,100%);max-height:90vh;overflow:auto}.modal h2{margin:0 0 18px}.modal-top{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#f2f3f8;border-radius:8px;padding:7px 10px;cursor:pointer}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.sidebar{padding:13px 16px;display:flex;align-items:center;justify-content:space-between}.brand{margin:0;font-size:18px}.nav{display:none}.side-note{margin:0;font-size:11px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content{grid-template-columns:1fr}main{padding-top:22px}}
+@media(max-width:520px){.top{align-items:flex-start;flex-direction:column}.stats{gap:9px}.stat{padding:14px}.number{font-size:25px}.stat-icon{width:29px;height:29px}.panel{padding:15px}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.side-note{display:none}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><span class="logo">✓</span> JobTrack</div>
+  <div class="nav active">▦ &nbsp; Dashboard</div>
+  <div class="nav">▤ &nbsp; Applications</div>
+  <div class="nav">◷ &nbsp; Activity log</div>
+  <div class="side-note">JOB & INTERNSHIP TRACKER<br>Built with HTML, CSS & JavaScript</div>
+</aside>
+<main>
+  <header class="top">
+    <div><div class="eyebrow">Your career workspace</div><h1>Application dashboard</h1><p class="sub">Keep every opportunity organized in one place.</p></div>
+    <button class="button" id="addTop">＋ Add application</button>
+  </header>
+  <section class="stats">
+    <div class="stat"><div class="stat-top"><span>Total applications</span><span class="stat-icon">▤</span></div><div class="number" id="total">0</div><div class="small">All tracked opportunities</div></div>
+    <div class="stat"><div class="stat-top"><span>Applied</span><span class="stat-icon">↗</span></div><div class="number" id="applied">0</div><div class="small">Waiting for a response</div></div>
+    <div class="stat"><div class="stat-top"><span>Interviews</span><span class="stat-icon">◷</span></div><div class="number" id="interviews">0</div><div class="small">In the interview stage</div></div>
+    <div class="stat"><div class="stat-top"><span>Offers</span><span class="stat-icon">✦</span></div><div class="number" id="offers">0</div><div class="small">Positive outcomes</div></div>
+  </section>
+  <div class="content">
+    <section>
+      <div class="panel">
+        <div class="panel-head"><h2>Your applications</h2><button class="button secondary" id="addInline">＋ Add new</button></div>
+        <input class="search" id="search" placeholder="Search by company name…" aria-label="Search by company">
+        <div class="filters" id="filters">
+          <button class="filter active" data-status="All">All</button><button class="filter" data-status="Applied">Applied</button><button class="filter" data-status="Interview">Interview</button><button class="filter" data-status="Offer">Offer</button><button class="filter" data-status="Rejected">Rejected</button>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Company / Role</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <div class="empty" id="empty">No applications yet. Add your first opportunity to get started.</div>
+      </div>
+    </section>
+    <aside>
+      <div class="panel"><div class="panel-head"><h2>＋ Quick add</h2></div>
+        <form id="quickForm">
+          <div class="field"><label for="qCompany">Company name</label><input id="qCompany" required placeholder="e.g. Acme Corp"></div>
+          <div class="field"><label for="qPosition">Job position</label><input id="qPosition" required placeholder="e.g. Software Intern"></div>
+          <div class="field"><label for="qStatus">Status</label><select id="qStatus"><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></div>
+          <div class="field"><label for="qNotes">Notes (optional)</label><textarea id="qNotes" placeholder="Recruiter, interview date, reminders…"></textarea></div>
+          <button class="button" type="submit" style="width:100%">Save application</button>
+        </form>
+      </div>
+      <div class="panel"><div class="panel-head"><h2>Recent activity</h2><button class="mini" id="clearLogs">Clear</button></div><div id="activity"></div><div class="hint">Your data is saved in this browser on this device. Export a backup regularly if you need to move it elsewhere.</div></div>
+    </aside>
+  </div>
+  <div class="footer">JobTrack · Job / Internship Application Tracker</div>
+</main>
+</div>
+<div class="modal-back" id="modalBack"><div class="modal"><div class="modal-top"><h2 id="modalTitle">Add application</h2><button class="close" id="closeModal">✕</button></div><form id="modalForm"><input type="hidden" id="editId"><div class="formgrid">
+<div class="field"><label for="mCompany">Company name</label><input id="mCompany" required></div>
+<div class="field"><label for="mPosition">Job position</label><input id="mPosition" required></div>
+<div class="field"><label for="mStatus">Status</label><select id="mStatus"><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></div>
+<div class="field"><label for="mDate">Application date</label><input type="date" id="mDate"></div>
+<div class="field full"><label for="mNotes">Notes</label><textarea id="mNotes"></textarea></div>
+</div><div class="form-actions"><button class="button secondary" type="button" id="cancelModal">Cancel</button><button class="button" type="submit">Save application</button></div></form></div></div>
+<div class="toast" id="toast"></div>
+<script>
+let apps=[], logs=[], filter='All';
+const API='/api';
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dateNow(){return new Date().toISOString().slice(0,10)}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2400)}
+async function request(url, options={}) {
+  const response=await fetch(API+url,{headers:{'Content-Type':'application/json'},...options});
+  if(!response.ok){let message='Request failed';try{const data=await response.json();message=data.message||data.error||message}catch{};throw new Error(message)}
+  if(response.status===204)return null;
+  return response.json();
+}
+async function refresh(){try{apps=await request('/applications');logs=await request('/logs');render();renderLogs()}catch(e){toast('Could not connect to Java backend. Is the server running?');console.error(e)}}
+function render(){let q=document.getElementById('search').value.trim().toLowerCase();let shown=apps.filter(a=>(filter==='All'||a.status===filter)&&a.companyName.toLowerCase().includes(q));document.getElementById('total').textContent=apps.length;document.getElementById('applied').textContent=apps.filter(a=>a.status==='Applied').length;document.getElementById('interviews').textContent=apps.filter(a=>a.status==='Interview').length;document.getElementById('offers').textContent=apps.filter(a=>a.status==='Offer').length;
+document.getElementById('rows').innerHTML=shown.map(a=>`<tr><td><div class="company">${esc(a.companyName)}</div><div class="role">${esc(a.position)} · #${a.applicationId}</div>${a.notes?`<div class="role">✎ ${esc(a.notes)}</div>`:''}</td><td><span class="pill ${esc(a.status)}">${esc(a.status)}</span></td><td>${esc(a.applicationDate)}</td><td><div class="actions"><button class="mini" onclick="editApp(${a.applicationId})">Edit</button><button class="mini" onclick="removeApp(${a.applicationId})">Delete</button></div></td></tr>`).join('');
+document.getElementById('empty').style.display=shown.length?'none':'block';}
+function renderLogs(){let el=document.getElementById('activity');el.innerHTML=logs.length?logs.slice(0,8).map(l=>`<div class="activity"><span class="dot"></span><div><div class="activity-text">${esc(l)}</div></div></div>`).join(''):'<div class="small">No activity yet.</div>'}
+function openModal(a=null){document.getElementById('modalTitle').textContent=a?'Edit application':'Add application';document.getElementById('editId').value=a?a.applicationId:'';document.getElementById('mCompany').value=a?a.companyName:'';document.getElementById('mPosition').value=a?a.position:'';document.getElementById('mStatus').value=a?a.status:'Applied';document.getElementById('mDate').value=a?a.applicationDate:dateNow();document.getElementById('mNotes').value=a?a.notes:'';document.getElementById('modalBack').style.display='flex'}
+function closeModal(){document.getElementById('modalBack').style.display='none'}
+function editApp(id){let a=apps.find(x=>x.applicationId===id);if(a)openModal(a)}
+async function removeApp(id){let a=apps.find(x=>x.applicationId===id);if(a&&confirm(`Remove application for ${a.companyName}?`)){try{await request(`/applications/${id}`,{method:'DELETE'});await refresh();toast('Application removed')}catch(e){toast(e.message)}}}
+document.getElementById('quickForm').addEventListener('submit',async e=>{e.preventDefault();try{await request('/applications',{method:'POST',body:JSON.stringify({companyName:document.getElementById('qCompany').value,position:document.getElementById('qPosition').value,status:document.getElementById('qStatus').value,notes:document.getElementById('qNotes').value,applicationDate:dateNow()})});e.target.reset();await refresh();toast('Application added successfully')}catch(err){toast(err.message)}});
+document.getElementById('modalForm').addEventListener('submit',async e=>{e.preventDefault();let id=document.getElementById('editId').value;let body={companyName:document.getElementById('mCompany').value,position:document.getElementById('mPosition').value,status:document.getElementById('mStatus').value,applicationDate:document.getElementById('mDate').value||dateNow(),notes:document.getElementById('mNotes').value};try{await request(id?`/applications/${id}`:'/applications',{method:id?'PUT':'POST',body:JSON.stringify(body)});closeModal();await refresh();toast(id?'Application updated':'Application added successfully')}catch(err){toast(err.message)}});
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('filters').addEventListener('click',e=>{let b=e.target.closest('[data-status]');if(!b)return;filter=b.dataset.status;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()});
+['addTop','addInline'].forEach(id=>document.getElementById(id).addEventListener('click',()=>openModal()));
+['closeModal','cancelModal'].forEach(id=>document.getElementById(id).addEventListener('click',closeModal));
+document.getElementById('modalBack').addEventListener('click',e=>{if(e.target.id==='modalBack')closeModal()});
+document.getElementById('clearLogs').addEventListener('click',()=>toast('Logs are retained by the Java backend.'));
+refresh();
+</script>
+</body>
+</html>
